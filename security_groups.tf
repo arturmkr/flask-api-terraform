@@ -12,15 +12,6 @@ resource "aws_security_group" "flask_api_backend_sg" {
   }
 }
 
-resource "aws_security_group" "flask_api_db_sg" {
-  name        = "flask_api_db_sg"
-  vpc_id      = data.aws_vpc.default_vpc_data.id
-
-  tags = {
-    Name = "flask_api_db_sg"
-  }
-}
-
 resource "aws_security_group_rule" "allow_ssh" {
   type              = "ingress"
   from_port         = 22
@@ -46,13 +37,4 @@ resource "aws_security_group_rule" "allow_all_out" {
   protocol          = "-1"
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.flask_api_backend_sg.id
-}
-
-resource "aws_security_group_rule" "allow_db" {
-  type              = "ingress"
-  from_port         = 3306
-  to_port           = 3306
-  protocol          = "tcp"
-  source_security_group_id = aws_security_group.flask_api_backend_sg.id
-  security_group_id = aws_security_group.flask_api_db_sg.id
 }
