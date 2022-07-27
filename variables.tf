@@ -25,5 +25,5 @@ variable "rds_login" {
 
 variable "rds_password" {
   type = string
-  default = "devops"
+  default = "useropsdb"
 }
