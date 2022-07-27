@@ -52,6 +52,6 @@ resource "aws_security_group_rule" "allow_mysql" {
   from_port                = 3306
   to_port                  = 3306
   protocol                 = "tcp"
-  cidr_blocks              = ["0.0.0.0/0"]
+  cidr_blocks              = [data.aws_vpc.default_vpc_data.cidr_block]
   security_group_id        = aws_security_group.flask_api_db_sg.id
 }
